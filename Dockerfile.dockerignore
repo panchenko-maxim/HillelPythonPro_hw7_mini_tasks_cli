@@ -1,0 +1,10 @@
+# Ignore all
+**
+
+# Exclude
+!uv.lock
+!pyproject.toml
+!.python-version
+
+!main.py
+!app
