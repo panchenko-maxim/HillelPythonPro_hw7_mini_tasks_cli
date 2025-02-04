@@ -9,4 +9,4 @@ def try_to_read_file(file: str) -> str:
              text_from_file: str = file_for_read.read()
              return text_from_file
     except FileNotFoundError:
-        return "File not found in the files_input directory(by default search 'file_.txt' in folder 'files_input')."
+        return "File not found in the files_input directory(by default search 'file.txt' in folder 'files_input')."

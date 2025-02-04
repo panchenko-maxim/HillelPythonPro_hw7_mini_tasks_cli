@@ -45,7 +45,7 @@ For run all tasks in default (only run).
 But for "Reading a file" you mast to create "file.txt" in folder "files_input".
 
 ```shell
-python main.py all run 
+python main.py all_tasks run 
 ```
 
 ---
@@ -106,25 +106,6 @@ For get average weight and height of people. Create drawing in the file.
 
 ```shell
 python main.py average run  
-```
-
----
-### !!! Run "All" tasks with cli
-
-For run all tasks in default (only run). 
-But for "Reading a file" you mast to create "file.txt" in folder "files_input".
-
-```shell
-python main.py average run  
-```
-
----
-### 🚮 Purge
-
-Make all actions needed for purge homework related data.
-
-```shell
-just homework-i-docker-i-purge
 ```
 
 ---
