@@ -8,5 +8,5 @@ app_cli = typer.Typer()
 
 @app_cli.command()
 def run(
-        file: Annotated[str, typer.Option(help="Name file for reading.")]="file.txt") -> None:
+        file: Annotated[str, typer.Option(help="Name file for reading.")]="file_.txt") -> None:
     reading_a_file(file=file)

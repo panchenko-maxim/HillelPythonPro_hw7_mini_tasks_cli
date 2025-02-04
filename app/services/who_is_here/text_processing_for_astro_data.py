@@ -1,6 +1,6 @@
 import json
 
-from app.services.new_astros_data_format import new_astros_data_format
+from app.services.who_is_here.new_astros_data_format import new_astros_data_format
 
 
 def text_processing_for_astro_data(astros_data: json) -> str:

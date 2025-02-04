@@ -4,7 +4,7 @@ from pathlib import Path
 import requests
 
 from app.config.paths import ROOT_DIR
-from app.services.get_day_seconds_now import get_day_seconds_now
+from app.services.who_is_here.get_day_seconds_now import get_day_seconds_now
 
 
 def save_and_return_astro_file() -> None:
