@@ -1,5 +1,4 @@
-def main():
-    print("Hello from hw7-mini-tasks-cli!")
+from app import main
 
 
 if __name__ == "__main__":

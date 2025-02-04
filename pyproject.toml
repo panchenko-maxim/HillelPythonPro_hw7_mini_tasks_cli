@@ -4,4 +4,74 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "faker>=35.2.0",
+    "requests>=2.32.3",
+    "typer>=0.15.1",
+]
+
+[tool.ruff]
+line-length = 120
+
+extend-exclude = [
+]
+
+[tool.ruff.lint]
+extend-select = [
+    "ALL",
+]
+extend-ignore = [
+    # Missing docstring.
+    "D1",
+    # flake8-future-annotations.
+    "FA",
+    # Missing type annotation for self and cls.
+    "ANN1",
+    # f-strings to format logging messages.
+    "G004",
+    # Consider {expression} instead of string join.
+    "FLY002",
+    # TODOs
+    # Author.
+    "TD002",
+    # Link to issue
+    "TD003",
+    # Line contains a TODO or related comment
+    "FIX",
+    # Args and kwargs are not used and not annotated
+    "ANN002",
+    "ANN003",
+    #
+    "ERA001", # Commented code
+    #
+    "PLR2044", # Line with empty comment
+    #
+    #    "T201", # print statement. Don't remove in this app, because it's Proof of Concept.
+]
+
+task-tags = [
+    "TODO",
+    "FIXME",
+    "HACK",
+    "XXX",
+    "[",
+]
+
+[tool.ruff.lint.flake8-builtins]
+builtins-allowed-modules = [
+    "typing",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+# https://betterprogramming.pub/3-different-docstring-formats-for-python-d27be81e0d68
+
+[tool.ruff.lint.flake8-comprehensions]
+allow-dict-calls-with-keyword-arguments = true
+
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+    # Unused import.
+    "F401",
+]
