@@ -2,16 +2,9 @@ from pathlib import Path
 
 import typer
 
-from app.config.paths import ROOT_DIR
+from app.services.reading_a_file.try_to_read_file import try_to_read_file
 
 
 def reading_a_file(file: str) -> None:
-    try:
-        with Path(ROOT_DIR / f"files_input/{file}").open("r") as file_for_read:
-             text_from_file: str = file_for_read.read()
-             typer.echo(text_from_file)
-    except FileNotFoundError:
-        typer.echo("File not found in the files_input directory.")
-
-
+    typer.echo(try_to_read_file(file=file))
 
