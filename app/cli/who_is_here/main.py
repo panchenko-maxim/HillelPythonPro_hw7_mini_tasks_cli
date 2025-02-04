@@ -3,6 +3,7 @@ import typer
 from app.services.check_astros_file import check_astros_file
 from app.services.text_processing_for_astro_data import text_processing_for_astro_data
 
+
 def who_is_here() -> None:
     astros_data = check_astros_file()
     typer.echo(f"Hello, now in space {astros_data['number']} astronauts\n"
