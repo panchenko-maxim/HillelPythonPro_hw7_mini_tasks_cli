@@ -2,16 +2,18 @@ import csv
 import json
 from pathlib import Path
 
-import pandas
+import matplotlib.pyplot as plt
 import requests
-import urllib3
+import typer
 
 from app.config.paths import ROOT_DIR
 
 
 def load_json_file(name_json: str) -> None:
-    with open(ROOT_DIR / f"files_output/{name_json}", "r", encoding="utf-8") as file_json:
+    with Path(ROOT_DIR / f"files_output/{name_json}", encoding="utf-8").open("r") as file_json:
          return json.load(file_json)
+    # with open(ROOT_DIR / f"files_output/{name_json}", encoding="utf-8") as file_json:
+    #      return json.load(file_json)
 
 
 def open_json_file(name_json: str) -> None:
@@ -27,24 +29,56 @@ def open_json_file(name_json: str) -> None:
 
 
 def from_csv_in_json(name_csv: str, name_json: str) -> None:
-    with open(ROOT_DIR / f"files_output/{name_csv}", encoding="utf-8") as file:
+    with Path(ROOT_DIR / f"files_output/{name_csv}", encoding="utf-8").open("r") as file:
         reader = csv.DictReader(file)
-        with open(ROOT_DIR / f"files_output/{name_json}", "w", encoding="utf-8") as file_json:
+        with Path(ROOT_DIR / f"files_output/{name_json}", encoding="utf-8").open("w") as file_json:
             json.dump([dict(el) for el in reader], file_json, indent=4)
+    # with open(ROOT_DIR / f"files_output/{name_csv}", encoding="utf-8") as file:
+    #     reader = csv.DictReader(file)
+    #     with open(ROOT_DIR / f"files_output/{name_json}", "w", encoding="utf-8") as file_json:
+    #         json.dump([dict(el) for el in reader], file_json, indent=4)
 
 def download_csv_file(name_csv: str) -> bool:
     url = "https://drive.google.com/uc?export=download&id=13nk_FYpcayUck2Ctrela5Tjt9JQbjznt"
     response = requests.get(url=url)
     if response.status_code == 200:
-        with open(ROOT_DIR / f"files_output/{name_csv}", "wb") as file:
+        # with open(ROOT_DIR / f"files_output/{name_csv}", "wb") as file:
+        with Path(ROOT_DIR / f"files_output/{name_csv}").open("wb") as file:
             file.write(response.content)
         return True
     return False
 
+def draw_and_save_people_dependence_of_weight_on_height(heights: list, weights: list) -> None:
+    plt.figure(figsize=(8, 6))
+    plt.scatter(heights, weights, color="b", label="People's data")
+    plt.xlabel("Height (sm)")
+    plt.ylabel("Weight (kg)")
+    plt.title("Dependence of weight on height")
+    plt.legend()
+    plt.grid(True)
+    plt.savefig(ROOT_DIR / "files_output/weight_vs_height.png", dpi=300)
+
 def average() -> None:
     json_file = open_json_file("average.json")
-    print(json_file)
+    heights = []
+    weights = []
+    count = 0
+    for el in json_file:
+        heights.append(float(el["Height(Inches)"]) * 2.54)
+        weights.append(float(el["Weight(Pounds)"]) * 0.45359237)
+        count += 1
+    draw_and_save_people_dependence_of_weight_on_height(heights, weights)
+    typer.echo(
+        f"Hello! We counted {count} people.\n"
+        f"---\n"
+        f"Average height: {sum(heights) / count} centimeters\n"
+        f"Average weight: {sum(weights) / count} kilograms\n"
+        f"---\n"
+        f"Drawing in the file: files_output/weight_vs_height.png")
 
-average()
+
+
+
+
 
 
