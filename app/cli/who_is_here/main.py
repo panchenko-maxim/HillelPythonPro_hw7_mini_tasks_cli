@@ -1,38 +1,17 @@
-from datetime import datetime
+import typer
 
-import json
-from pathlib import Path
+from app.services.check_astros_file import check_astros_file
+from app.services.text_processing_for_astro_data import text_processing_for_astro_data
 
-import requests
-
-from app.config.paths import ROOT_DIR
-
-
-def save_and_return_file() -> None:
-    with requests.Session() as session, session.get(url="https://api.open-notify.org/astros.json") as response:
-        astros_data = response.json()
-        now = datetime.now()
-        seconds_today = now.hour * 3600 + now.minute * 60 + now.second
-        astros_data["save_time"] = seconds_today
-        with Path(ROOT_DIR / "files_output/astros.json").open("w") as file:
-            json.dump(astros_data, file, indent=4)
-        return astros_data
-
-
-def check_astros_file() -> None:
-    try:
-        with Path(ROOT_DIR / "files_output/astros.json").open("r") as file:
-            data_from_json = json.load(file)
-            # if (datetime.now() - data_from_json["save_time"]).second > 15:
-            #     return save_and_return_file()
-            return data_from_json
-    except FileNotFoundError:
-        return save_and_return_file()
 
 def who_is_here() -> None:
     astros_data = check_astros_file()
-    print(astros_data)
-
-who_is_here()
+    typer.echo(f"Hello, now in space {astros_data['number']} astronauts\n"
+               f"They have different crafts and names\n"
+               f"Here information about these:\n"
+               f"---\n"
+               f"{text_processing_for_astro_data(astros_data=astros_data)}\n"
+               f"---\n"
+               f"They are good guys! Good luck them!")
 
 

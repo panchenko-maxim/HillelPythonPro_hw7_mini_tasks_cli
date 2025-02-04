@@ -83,6 +83,15 @@ python main.py user_generator run --amount 15 --format-file "json"
 ---
 ### 3) Run "Reading a file" task with cli
 
+For get in terminal information about astronauts
+
+```shell
+python main.py who_is_here run  
+```
+
+---
+### 4) Run "Average" task with cli
+
 ---
 ### 🚮 Purge
 
