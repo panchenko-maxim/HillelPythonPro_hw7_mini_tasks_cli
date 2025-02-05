@@ -1,7 +1,9 @@
 import typer
 
+from app.cli.average.main import average
+
 app_cli = typer.Typer()
 
-@app_cli.command()
+@app_cli.command(help="Get average weight and height of people. Create drawing in the file.")
 def run() -> None:
-    typer.echo("Hello pidor!")
+    average()

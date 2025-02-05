@@ -2,9 +2,9 @@ import json
 from pathlib import Path
 
 from app.config.paths import ROOT_DIR
-from app.services.check_different_seconds import check_different_seconds
-from app.services.get_day_seconds_now import get_day_seconds_now
-from app.services.save_and_return_astro_file import save_and_return_astro_file
+from app.services.who_is_here.check_different_seconds import check_different_seconds
+from app.services.who_is_here.get_day_seconds_now import get_day_seconds_now
+from app.services.who_is_here.save_and_return_astro_file import save_and_return_astro_file
 
 
 def check_astros_file() -> None:
